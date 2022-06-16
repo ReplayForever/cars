@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from car_description.views import *
+from car_app.views import *
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/model_car_list/', ModelCarAPIList.as_view()),
-    path('api/v1/car_list/', CarAPIList.as_view()),
-    path('api/v1/car_list/<int:pk>', CarAPIUpdate.as_view()),
-    path('api/v1/car_detail/<int:pk>', CarAPIDetailView.as_view()),
-    path('api/v1/color_list/', ColorAPIList.as_view()),
-    path('api/v1/order_car_list/', OrderCarAPIList.as_view()),
+    path("admin/", admin.site.urls),
+    path("api/v1/type/", CarTypeAPIList.as_view()),
+    path("api/v1/brands/", BrandAPIList.as_view()),
+    path("api/v1/brands/<int:pk>", BrandAPIUpdate.as_view()),
+    path("api/v1/brands/<int:pk>", BrandAPIDetailView.as_view()),
+    path("api/v1/color/", ColorAPIList.as_view()),
+    path("api/v1/order/", OrderCarAPIList.as_view()),
 ]
