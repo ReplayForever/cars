@@ -1,14 +1,9 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
 from car_app.models import Color
 from car_app.serializers import ColorSerializer
 
 
-class ColorAPIList(generics.ListCreateAPIView):
-    queryset = Color.objects.all()
-    serializer_class = ColorSerializer
-
-
-class ColorAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+class ColorViewSet(viewsets.ModelViewSet):
     queryset = Color.objects.all()
     serializer_class = ColorSerializer

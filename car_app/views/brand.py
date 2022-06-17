@@ -1,14 +1,9 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
 from car_app.models import Brand
 from car_app.serializers import BrandSerializer
 
 
-class BrandAPIList(generics.ListCreateAPIView):
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
-
-
-class BrandAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer

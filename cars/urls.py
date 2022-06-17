@@ -14,23 +14,37 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from car_app.views import *
 from rest_framework_swagger.views import get_swagger_view
+from rest_framework import routers
 
 
 schema_view = get_swagger_view(title='Pastebin API')
+
+router_brands = routers.SimpleRouter()
+router_types = routers.SimpleRouter()
+router_colors = routers.SimpleRouter()
+router_orders = routers.SimpleRouter()
+router_brands.register(r'brands', BrandViewSet)
+router_types.register(r'types', CarTypeViewSet)
+router_colors.register(r'colors', ColorViewSet)
+router_orders.register(r'orders', OrderCarViewSet)
 
 
 urlpatterns = [
     re_path(r'^$', schema_view, name='index'),
     path("admin/", admin.site.urls),
-    path("api/v1/types/", CarTypeAPIList.as_view()),
-    path("api/v1/types/<int:pk>", CarTypeAPIDetailView.as_view()),
-    path("api/v1/brands/", BrandAPIList.as_view()),
-    path("api/v1/brands/<int:pk>", BrandAPIDetailView.as_view()),
-    path("api/v1/colors/", ColorAPIList.as_view()),
-    path("api/v1/colors/<int:pk>", ColorAPIDetailView.as_view()),
-    path("api/v1/orders/", OrderCarAPIList.as_view()),
-    path("api/v1/orders/<int:pk>", OrderCarAPIDetailView.as_view()),
+    # path("api/v1/types/", CarTypeAPIList.as_view()),
+    # path("api/v1/types/<int:pk>", CarTypeAPIDetailView.as_view()),
+    path("api/v1/", include(router_brands.urls)),
+    path("api/v1/", include(router_types.urls)),
+    path("api/v1/", include(router_colors.urls)),
+    path("api/v1/", include(router_orders.urls)),
+    # path("api/v1/brands/", BrandViewSet.as_view({'get': 'list', 'post': 'create'})),
+    # path("api/v1/brands/<int:pk>", BrandViewSet.as_view({'put': 'update', 'delete': 'destroy'})),
+    # path("api/v1/colors/", ColorAPIList.as_view()),
+    # path("api/v1/colors/<int:pk>", ColorAPIDetailView.as_view()),
+    # path("api/v1/orders/", OrderCarAPIList.as_view()),
+    # path("api/v1/orders/<int:pk>", OrderCarAPIDetailView.as_view()),
 ]
