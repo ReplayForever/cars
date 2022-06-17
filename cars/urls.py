@@ -14,16 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from car_app.views import *
+from rest_framework_swagger.views import get_swagger_view
+
+
+schema_view = get_swagger_view(title='Pastebin API')
 
 
 urlpatterns = [
+    re_path(r'^$', schema_view, name='index'),
     path("admin/", admin.site.urls),
-    path("api/v1/type/", CarTypeAPIList.as_view()),
+    path("api/v1/types/", CarTypeAPIList.as_view()),
+    path("api/v1/types/<int:pk>", CarTypeAPIDetailView.as_view()),
     path("api/v1/brands/", BrandAPIList.as_view()),
-    path("api/v1/brands/<int:pk>", BrandAPIUpdate.as_view()),
     path("api/v1/brands/<int:pk>", BrandAPIDetailView.as_view()),
-    path("api/v1/color/", ColorAPIList.as_view()),
-    path("api/v1/order/", OrderCarAPIList.as_view()),
+    path("api/v1/colors/", ColorAPIList.as_view()),
+    path("api/v1/colors/<int:pk>", ColorAPIDetailView.as_view()),
+    path("api/v1/orders/", OrderCarAPIList.as_view()),
+    path("api/v1/orders/<int:pk>", OrderCarAPIDetailView.as_view()),
 ]
