@@ -35,16 +35,8 @@ router_orders.register(r'orders', OrderCarViewSet)
 urlpatterns = [
     re_path(r'^$', schema_view, name='index'),
     path("admin/", admin.site.urls),
-    # path("api/v1/types/", CarTypeAPIList.as_view()),
-    # path("api/v1/types/<int:pk>", CarTypeAPIDetailView.as_view()),
     path("api/v1/", include(router_brands.urls)),
     path("api/v1/", include(router_types.urls)),
     path("api/v1/", include(router_colors.urls)),
     path("api/v1/", include(router_orders.urls)),
-    # path("api/v1/brands/", BrandViewSet.as_view({'get': 'list', 'post': 'create'})),
-    # path("api/v1/brands/<int:pk>", BrandViewSet.as_view({'put': 'update', 'delete': 'destroy'})),
-    # path("api/v1/colors/", ColorAPIList.as_view()),
-    # path("api/v1/colors/<int:pk>", ColorAPIDetailView.as_view()),
-    # path("api/v1/orders/", OrderCarListCreate.as_view()),
-    # path("api/v1/orders/<int:pk>", OrderCarAPIDetailView.as_view()),
 ]

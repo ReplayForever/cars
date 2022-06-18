@@ -4,8 +4,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class OrderCar(models.Model):
-    color = models.ForeignKey("Color", on_delete=models.CASCADE)
-    type = models.ForeignKey("CarType", on_delete=models.CASCADE)
+    color = models.ForeignKey("Color", related_name="order", on_delete=models.CASCADE)
+    type = models.ForeignKey("CarType", related_name="order", on_delete=models.CASCADE)
     order_time = models.DateField(default=date.today)
     count = models.PositiveIntegerField(
         default=1, validators=[MinValueValidator(1), MaxValueValidator(2147483647)]

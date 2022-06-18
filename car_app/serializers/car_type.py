@@ -3,8 +3,8 @@ from car_app.models import CarType
 
 
 class CarTypeSerializer(serializers.ModelSerializer):
-    brand = serializers.CharField(read_only=True)
-    brand_id = serializers.IntegerField()
+    brand = serializers.PrimaryKeyRelatedField(read_only=True, source='brand.name')
+    brand_id = serializers.IntegerField(write_only=True)
 
     class Meta:
         model = CarType
