@@ -45,6 +45,6 @@ urlpatterns = [
     # path("api/v1/brands/<int:pk>", BrandViewSet.as_view({'put': 'update', 'delete': 'destroy'})),
     # path("api/v1/colors/", ColorAPIList.as_view()),
     # path("api/v1/colors/<int:pk>", ColorAPIDetailView.as_view()),
-    # path("api/v1/orders/", OrderCarAPIList.as_view()),
+    # path("api/v1/orders/", OrderCarListCreate.as_view()),
     # path("api/v1/orders/<int:pk>", OrderCarAPIDetailView.as_view()),
 ]

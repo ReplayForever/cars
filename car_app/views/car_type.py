@@ -7,3 +7,4 @@ from car_app.serializers import CarTypeSerializer
 class CarTypeViewSet(viewsets.ModelViewSet):
     queryset = CarType.objects.all()
     serializer_class = CarTypeSerializer
+
