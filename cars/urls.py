@@ -26,12 +26,10 @@ schema_view = get_swagger_view(title="Car orders API")
 router_brands = routers.SimpleRouter()
 router_types = routers.SimpleRouter()
 router_colors = routers.SimpleRouter()
-router_colors_count = routers.SimpleRouter()
 router_orders = routers.SimpleRouter()
 router_brands.register(r"brands", BrandsViewSet)
 router_types.register(r"types", CarTypesViewSet)
 router_colors.register(r"colors", ColorsViewSet)
-router_colors_count.register(r"ordered", OrderedColorBrandViewSet, basename="ordered")
 router_orders.register(r"orders", OrderCarViewSet, basename="orders")
 
 
@@ -41,6 +39,5 @@ urlpatterns = [
     path("api/v1/", include(router_brands.urls)),
     path("api/v1/", include(router_types.urls)),
     path("api/v1/", include(router_colors.urls)),
-    path("api/v1/", include(router_colors_count.urls)),
     path("api/v1/", include(router_orders.urls)),
 ]

@@ -1,8 +1,11 @@
+from django.db.models import F, Sum
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 
 from car_app.models import OrderCar
-from car_app.serializers import OrderCarSerializer
+from car_app.serializers import OrderCarSerializer, OrderedColorBrandSerializer
 
 
 class OrderCarPagination(PageNumberPagination):
@@ -25,3 +28,25 @@ class OrderCarViewSet(viewsets.ModelViewSet):
         if brand is not None:
             queryset = queryset.filter(type__brand__name=brand)
         return queryset
+
+    @action(detail=False)
+    def colors(self, request):
+        """
+        Returns a list of ordered colors
+        """
+        colors = OrderCar.objects.values("color__name").annotate(
+            color=F("color_id__name"), count=Sum("count")
+        )
+        serializer = OrderedColorBrandSerializer(colors, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
+    def brands(self, request):
+        """
+        Returns a list of ordered brands
+        """
+        brands = OrderCar.objects.values("type__brand").annotate(
+            brand=F("type__brand__name"), count=Sum("count")
+        )
+        serializer = OrderedColorBrandSerializer(brands, many=True)
+        return Response(serializer.data)
