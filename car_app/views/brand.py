@@ -4,6 +4,10 @@ from car_app.models import Brand
 from car_app.serializers import BrandSerializer
 
 
-class BrandViewSet(viewsets.ModelViewSet):
+class BrandsViewSet(viewsets.ModelViewSet):
+    """
+    Returns a list of brands
+    """
+
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer

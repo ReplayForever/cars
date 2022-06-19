@@ -133,7 +133,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     # 'PAGE_SIZE': 10,
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_RENDERER_CLASSES": [
@@ -141,3 +141,10 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
 }
+
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000'
+# ]
+#
+# CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+# CORS_ALLOW_CREDENTIALS = True

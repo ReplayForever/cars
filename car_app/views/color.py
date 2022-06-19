@@ -4,6 +4,10 @@ from car_app.models import Color
 from car_app.serializers import ColorSerializer
 
 
-class ColorViewSet(viewsets.ModelViewSet):
+class ColorsViewSet(viewsets.ModelViewSet):
+    """
+    Returns a list of available colors
+    """
+
     queryset = Color.objects.all()
     serializer_class = ColorSerializer

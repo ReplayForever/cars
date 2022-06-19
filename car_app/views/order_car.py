@@ -10,6 +10,18 @@ class OrderCarPagination(PageNumberPagination):
 
 
 class OrderCarViewSet(viewsets.ModelViewSet):
-    queryset = OrderCar.objects.all()
+    """
+    Returns a sorted list of orders.
+    You can filter list by brand.
+    Note that code snippets are paginated to a maximum of 10 per page.
+    """
+
     serializer_class = OrderCarSerializer
     pagination_class = OrderCarPagination
+
+    def get_queryset(self):
+        queryset = OrderCar.objects.all().order_by("-count")
+        brand = self.request.query_params.get("brand")
+        if brand is not None:
+            queryset = queryset.filter(type__brand__name=brand)
+        return queryset

@@ -7,23 +7,35 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('car_app', '0001_initial'),
+        ("car_app", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='cartype',
-            name='brand',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cartype', to='car_app.brand'),
+            model_name="cartype",
+            name="brand",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="cartype",
+                to="car_app.brand",
+            ),
         ),
         migrations.AlterField(
-            model_name='ordercar',
-            name='color',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order', to='car_app.color'),
+            model_name="ordercar",
+            name="color",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="order",
+                to="car_app.color",
+            ),
         ),
         migrations.AlterField(
-            model_name='ordercar',
-            name='type',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='order', to='car_app.cartype'),
+            model_name="ordercar",
+            name="type",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="order",
+                to="car_app.cartype",
+            ),
         ),
     ]

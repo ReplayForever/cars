@@ -20,23 +20,27 @@ from rest_framework_swagger.views import get_swagger_view
 from rest_framework import routers
 
 
-schema_view = get_swagger_view(title='Pastebin API')
+schema_view = get_swagger_view(title="Car orders API")
+
 
 router_brands = routers.SimpleRouter()
 router_types = routers.SimpleRouter()
 router_colors = routers.SimpleRouter()
+router_colors_count = routers.SimpleRouter()
 router_orders = routers.SimpleRouter()
-router_brands.register(r'brands', BrandViewSet)
-router_types.register(r'types', CarTypeViewSet)
-router_colors.register(r'colors', ColorViewSet)
-router_orders.register(r'orders', OrderCarViewSet)
+router_brands.register(r"brands", BrandsViewSet)
+router_types.register(r"types", CarTypesViewSet)
+router_colors.register(r"colors", ColorsViewSet)
+router_colors_count.register(r"ordered", OrderedColorBrandViewSet, basename="ordered")
+router_orders.register(r"orders", OrderCarViewSet, basename="orders")
 
 
 urlpatterns = [
-    re_path(r'^$', schema_view, name='index'),
+    re_path(r"^$", schema_view, name="index"),
     path("admin/", admin.site.urls),
     path("api/v1/", include(router_brands.urls)),
     path("api/v1/", include(router_types.urls)),
     path("api/v1/", include(router_colors.urls)),
+    path("api/v1/", include(router_colors_count.urls)),
     path("api/v1/", include(router_orders.urls)),
 ]
