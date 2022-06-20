@@ -27,9 +27,9 @@ router_brands = routers.SimpleRouter()
 router_types = routers.SimpleRouter()
 router_colors = routers.SimpleRouter()
 router_orders = routers.SimpleRouter()
-router_brands.register(r"brands", BrandsViewSet)
-router_types.register(r"types", CarTypesViewSet)
-router_colors.register(r"colors", ColorsViewSet)
+router_brands.register(r"brands", BrandsViewSet, basename='brands')
+router_types.register(r"types", CarTypesViewSet, basename='types')
+router_colors.register(r"colors", ColorsViewSet, basename='colors')
 router_orders.register(r"orders", OrderCarViewSet, basename="orders")
 
 
