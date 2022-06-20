@@ -11,67 +11,60 @@ from car_app.serializers import BrandSerializer
 class CarAPITestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.brand_1 = Brand.objects.create(name='VW')
-        cls.type_1 = CarType.objects.create(name='M3', brand_id=1)
-        cls.color_1 = Color.objects.create(name='Black')
+        cls.brand_1 = Brand.objects.create(name="VW")
+        cls.type_1 = CarType.objects.create(name="M3", brand_id=1)
+        cls.color_1 = Color.objects.create(name="Black")
 
     def test_brand_get(self):
-        url = reverse('brands-list')
+        url = reverse("brands-list")
         response = self.client.get(url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
     def test_brand_post(self):
-        url = reverse('brands-list')
+        url = reverse("brands-list")
         data = {"name": "Mercedes"}
         response = self.client.post(url, data)
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
     def test_color_get(self):
-        url = reverse('colors-list')
+        url = reverse("colors-list")
         response = self.client.get(url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
     def test_color_post(self):
-        url = reverse('colors-list')
+        url = reverse("colors-list")
         data = {"name": "Red"}
         response = self.client.post(url, data)
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
     def test_type_get(self):
-        url = reverse('types-list')
+        url = reverse("types-list")
         response = self.client.get(url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
     def test_type_post(self):
-        url = reverse('types-list')
-        data = {
-            "name": "Passat",
-            "brand_id": 1
-        }
+        url = reverse("types-list")
+        data = {"name": "Passat", "brand_id": 1}
         response = self.client.post(url, data)
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
     def test_order_get(self):
-        url = reverse('orders-list')
+        url = reverse("orders-list")
         response = self.client.get(url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
     def test_order_post(self):
-        url = reverse('orders-list')
-        data = {
-            "color_id": 1,
-            "type_id": 1,
-            "count": 12
-        }
+        url = reverse("orders-list")
+        data = {"color_id": 1, "type_id": 1, "count": 12}
         response = self.client.post(url, data)
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
     def test_ordered_color_get(self):
-        url = reverse('orders-list') + 'colors/'
+        url = reverse("orders-list") + "colors/"
         response = self.client.get(url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
     def test_ordered_brand_get(self):
-        url = reverse('orders-list') + 'brands/'
+        url = reverse("orders-list") + "brands/"
         response = self.client.get(url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)

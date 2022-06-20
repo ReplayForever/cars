@@ -11,5 +11,5 @@ class OrderCar(models.Model):
         default=1, validators=[MinValueValidator(1), MaxValueValidator(2147483647)]
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.id)

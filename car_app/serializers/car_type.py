@@ -9,6 +9,3 @@ class CarTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarType
         fields = ("name", "brand", "brand_id")
-
-    def create(self, validated_data):
-        return CarType.objects.create(**validated_data)

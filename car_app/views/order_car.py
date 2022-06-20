@@ -1,7 +1,8 @@
-from django.db.models import F, Sum
+from django.db.models import F, Sum, QuerySet
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.request import Request
 from rest_framework.response import Response
 
 from car_app.models import OrderCar
@@ -22,7 +23,7 @@ class OrderCarViewSet(viewsets.ModelViewSet):
     serializer_class = OrderCarSerializer
     pagination_class = OrderCarPagination
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = OrderCar.objects.all().order_by("-count")
         brand = self.request.query_params.get("brand")
         if brand is not None:
@@ -30,7 +31,7 @@ class OrderCarViewSet(viewsets.ModelViewSet):
         return queryset
 
     @action(detail=False)
-    def colors(self, request):
+    def colors(self, request: Request) -> Response:
         """
         Returns a list of ordered colors
         """
@@ -41,7 +42,7 @@ class OrderCarViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=False)
-    def brands(self, request):
+    def brands(self, request: Request) -> Response:
         """
         Returns a list of ordered brands
         """
